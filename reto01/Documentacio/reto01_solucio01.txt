@@ -1,0 +1,226 @@
+Crear un programa que demani 2 números num1 i num2 de l'1 al 50 i imprimiu:
+
+La suma de tots dos.
+
+Si tots dos números són primers o no.
+
+Si tots dos números són parells o no.
+
+Si num1 és menor que num2, imprimiu només els números parells en el rang entre num1 i num2 ascendent.
+
+Si num1 és més gran que num2, imprimeix només els nombres senars en el rang entre num1 i num2 descendent.
+
+Si num1 és igual a num2, imprimeix només una vegada si és primer o parell, imprimeix el rang només un número.
+
+Si els números no compleixen la condició, cal notificar-ho a l'usuari.
+
+
+
+SOLUCIONARI.
+Entendrem que treballem SOLS amb numeros ENTERS.
+
+Definim nº primer: Aquell ENTER que es divisible sols per ell i per 1
+
+Definim nº parell: Aquell enter que al dividir-lo per 2 el seu 'resto' es zero. NOTA: Funcio MODUL!!!!!!
+
+Val, llavors el tema es veure el proces que em de codificar, intentem escriure el qeu volem que faci el
+nostre programa començant amb blocs generals i anant-los desfent en pasos mes simples
+
+De manera mes general, podriem fer 3 pasos:
+    1 Obtenir valors
+    2 Calcular el qeu ens demanen
+    3 Mostrar resultats
+
+NOTA: Mireu, una cosa que cal tenir en compte es que el qeu donem per suposat a la vida real, no te per que
+ser aixi a dintre del codi, per tant, per evitar que pasin coses "raretes", no doneu mai coses per suposades
+i definiu explicitament el qeu voleu que pasi, i les seves condicions "ambientals".
+
+I si ja ho anem fent mes detallat ....
+    1 Demanem valors
+        * Demanem 1 valor
+        * Demanem 2 valor
+
+    2 Comprovem aquest valors siguin
+        * ENTERS, POSITIUS(aixo es sobreenten ja que el domini es positiu) i del DOMINI [1,50] (aquesta condicio no esta explicitament
+          indicada en el enunciat pero es fa falta definir-la per poder asignar els condicionals, tambe podriem pendre qualsevol altre
+          variacio del domini com (), (], [))
+        * Si no, avisar i recomençar!!!!
+
+    NOTA: Si no validem que els valors siguin numeros, les operacions seguents fallaran i tindrem errors descontrolats
+
+    3 Calculem la suma
+
+    4 Mirem si son primers tots dos: podem aplicar la definicio, o be tenir els valors en un array
+
+    5 Mirem si son parells tots dos: sols cal mirar el resultat de la operacio modul
+
+    6 Preparem resultat segons a<b,a=b,a>b
+        a<b -> imprimir nº PARELLS inclosos entre a i b en ordre ASCENDENT
+        a=b -> imprimir si es primer o parell, mostrar tambe a.
+        a>b -> imprimir nº SENARS inclosos entre a i b en ordre DESCENDENT
+
+    7 Mostrem els resultats
+
+Podeu anar reduint el pasos tant com vulgueu fins que veieu que un pas es pot substituir mes o menys
+per alguna "cosa" que ja coneixeu de codi.... Normalment quant us trobeu un condicional,
+un bucle o una sentencia simple. En aquest nivell, no busquem tant saber escriure el codi sino saber
+que es el qeu volem que faci el codi, el com .... ja el mirarem despres. I si, molts cops has de tornar
+enrere o canviar la manera que tenies prevista pq al intentar posar una idea en codi, resulta que es
+molt mes caotic del qeu semblava, aixi que tranquils, no pasa res per reformar el codi.
+
+Val, un cop escrita aquesta llista de pasos, podem intentar implementar cada pas en una funcio.
+Podem fer servir varaibles GLOBALS o tambe fer servir de LOCALS i anar-les pasant de funcio en funcio.
+
+Us poso un exmple de la mateixa funcio en les dues maneres:
+
+Amb variables GLOBALS
+Amb globals, no ens tenim que preocupar de gestionar les variables pq estan sempre disponibles
+
+/* ********************** */
+/* REPTE 01 DE JAVASCRIPT */
+/* ********************** */
+
+/* ************************* */
+/* Definim varaibles globals */
+    var numero1=0;
+    var numero2=0;
+    var n1ok=false;
+    var n2ok=false;
+    var numerosValidats=false;
+
+/* ************************** */
+/* Definim funcions auxiliars */
+
+    function demanarValor(){
+        /* NOTA: Recorda que els inputs son sempre STRINGS !!!!!! */
+        let entrada = prompt('Posa-hi un numero ENTER entre 1 i 50');
+        return entrada;
+    }
+
+    function comprovaValor(valor){
+        /* Comprovem si es NUMERO */
+        /* -- Podem fer servir la funcio isNaN que es dira si NO es un NUMERO (Not_A_Number) */
+        /* -- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN */
+        /* NOTA: Number.isNaN(valor) es TRUE si No es un numero, per tant !Number.isNaN(valor) retorna TRU si ES un numero, pq el simbol "!" es la negacio del qeu ve despres */
+            if(!Number.isNaN(valor)){}else{return false}
+
+        /* Comprovem si es ENTER */
+        */ -- Podem fer servir parseInt o validar pel typeOf .... */
+            if(valor==parseInt(valor)){}else{return false}
+
+        /* Comprovem si es POSITIU */
+        /* -- si em arribat aqui, podem saltar-nos aquest pas i validar si esta entre 1 i 50 directement */
+
+        /* Comprovem si es >=1 */
+            if(valor>=1){}else{return false}
+
+        /* Comprovem si es <=50 */
+        /* -- per fer les coses de manera una mica variada aqui farem servir la funcio ifthenElse reduida ..... */
+        /* -- condition ? exprIfTrue : exprIfFalse */
+        /* -- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator */
+            (valor<=50) ? console.log("seguim!) : return false;
+        
+        /* Si tot esta be, podem validar el valor retornat TRUE */
+            return true
+    }
+
+    function avisarEntradesInvalides(){
+        if(n1ok==false){
+            /* Vaja, el valor 1 no es bo */
+            alert("Vaja! el numero1 NO es valid!!!");
+            /* Acabem la funcio */
+            break
+        }else{
+            /* Es bo ... doncs mirem el 2 ..... */
+        }
+
+        if(n2ok==false){
+            /* Vaja, el valor 2 No es bo */
+            alert(Vaja! el numero2 No es valid!!!");
+            /* Acabem la funcio */
+            break
+        }else{
+            /* Es bo, podem acabar be .... */
+        }
+
+        /* Com tots dos son bons, podem acabar el bucle while, aixi que */
+        numerosValidats=true;
+    }
+
+    funcio entrada(){
+    /* Farem un bucle que rebi les dades i comprovi si so bones, si no ho son, doncs repetirem la entrada */
+        while(numerosValidats){
+            numero1=demanarValor()
+            numero2=demanarValor()
+            n1ok = comprovaValor(numero1)
+            n2ok = comprovaValor(numero2)
+            avisarEntradesInvalides()
+        }
+    }
+
+/* ***************** */
+/* Codi principal */
+
+    entrada();
+    calcular();
+    presentar();
+
+   
+
+NOTA: Homeeeeeee .... doncs vist aixi, potser podriem incloure la validacio dintre de la funcio qeu demana
+els valors inicials, i aixi sols cal ficar una al bucle .....noooooo??????? proveu-ho, i despres compareu
+a veure quin codi us sembla millor, mes facil de mantenir i mes eficient.
+
+NOTA: fixeu-vos que al fer el bucle amb 2 funcions, ens estalviem la meitat de linies de codi, pq si ho fem sense,
+hauriem de escriure el codi per rebre el valor1, el codi per validar el valor1, el codi per rebre el valor2
+i el codi per validar el valor2. I fent-lo amb 2 funcions SOLS escriurem el codi una vegada. Imagineu si 
+en comptes de 2 valors, us en demanessin 100 !!!!!
+
+Val! ara em vist com fer el codi, separar-lo es passos i intentar posar aqeust pasos en codi .... i resulta que
+molts cops us adonareu de que els pasos que penseu .... no s adapten gaire be al posar-los en codi, cap probma!!!
+Torneu enrerre i redisenyeu el vostre codi .... tants cops com us faci falta.
+
+En el cas anterior, jo agruparia tot el tema de validacio en una sola funcio pero seguraemt sera molt menys facil
+de seguir i de interpretar, encara que sera molt mes optim des de el punt de vista de la codificacio.
+
+
+UPDATE 
+
+20220731 - 16:15:00
+Fixeu-vos, anem a reduir la funcio de "entrada" a un codi mes eficient ......
+
+function entrada2(){
+    /* Funcio que reb, valida i retorna els valors que li dona el usuari */
+
+    /* Definim variables locals */
+    let nentrades=2;  // Definim quants valors volem rebre
+    let resultats=[]; // Definim un array per retornar els valors
+    let statusInputValidated = false;
+
+    /* rebem els valors de les entrades */
+    while(statusInputValidated){
+        /* Demanem un valor al usuari */
+        let valorRebut = prompt('Posa-hi un numero ENTER entre 1 i 50')
+
+        /* Validem valor amb condicions: NUMERO, ENTER, i pertanyent al domini  [1,50] */
+            /* [OK]     -> seguim, afegim al resultat i actualitzem contador de entrades */
+            /* [FALSE]  -> repetim peticio */
+        /* 
+        NOTA: Fixeu-vos, si volem optimitzar el codi, podriem posar 4 ifs independents, un per cada
+        condicio, pero llavors  s' executaran sempre 4 comparacions independentment de que alguna falli
+        Si posem els IFS encadenats, llavors a la que falli una ja no seguira mirant .... inclus podem
+        fer servir el operador ternari per compactar encara mes el codi ....
+        */
+    }
+
+    /* Retornem el resultats en forma de array */
+    return resultats
+}
+
+function calculs2(valors){}
+
+function presentacio2(valors){}
+
+function main2(){
+    presentacio2(calculs2(entrada2()));
+}

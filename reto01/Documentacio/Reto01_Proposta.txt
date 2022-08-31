@@ -1,0 +1,15 @@
+Crear un programa que demani 2 números num1 i num2 de l'1 al 50 i imprimiu:
+
+La suma de tots dos.
+
+Si tots dos números són primers o no.
+
+Si tots dos números són parells o no.
+
+Si num1 és menor que num2, imprimiu només els números parells en el rang entre num1 i num2 ascendent.
+
+Si num1 és més gran que num2, imprimeix només els nombres senars en el rang entre num1 i num2 descendent.
+
+Si num1 és igual a num2, imprimeix només una vegada si és primer o parell, imprimeix el rang només un número.
+
+Si els números no compleixen la condició, cal notificar-ho a l'usuari.
